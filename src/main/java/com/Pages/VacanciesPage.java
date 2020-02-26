@@ -1,17 +1,15 @@
 package com.Pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class VacanciesPage {
-    private WebDriver driver;
-    private WebDriverWait waiter;
-
-    public VacanciesPage (WebDriver driver, WebDriverWait waiter){
-        this.driver=driver;
-        this.waiter=waiter;
-    }
+public class VacanciesPage extends BasePage {
+//    private WebDriver driver;
+//    private WebDriverWait waiter;
+//
+//    public VacanciesPage (WebDriver driver, WebDriverWait waiter){
+//        this.driver=driver;
+//        this.waiter=waiter;
+//    }
 
 
 
@@ -28,7 +26,8 @@ public class VacanciesPage {
         }
     }
 
-    
+
+
     public boolean atPage(){
         String currentPageTitle = driver.getTitle();
         if (currentPageTitle.equals("Вакансии — Хабр Карьера")) {

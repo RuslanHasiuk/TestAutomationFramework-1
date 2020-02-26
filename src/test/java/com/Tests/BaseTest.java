@@ -28,14 +28,13 @@ public class BaseTest {
 //
 //
 //        driver.;
-//
-//
+////
 //    }
 
 
     @AfterMethod
     public void tearDown() {
 
-        DriverManager.getInstance().close();
+        DriverManager.close();
     }
 }

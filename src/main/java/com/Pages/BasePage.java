@@ -9,15 +9,15 @@ public class BasePage {
    protected WebDriver driver;
    protected WebDriverWait waiter;
 
-   public BasePage(){
+    public BasePage(){
       driver = DriverManager.getInstance();
       waiter = new WebDriverWait(driver, 20);
       PageFactory.initElements(driver, this);
    }
 
+   protected String CareerPortalUrl = "https://career.habr.com/?_ga=2.148120062.854997712.1581930826-228731092.1581346042";
 
 
 
 
-//
 }

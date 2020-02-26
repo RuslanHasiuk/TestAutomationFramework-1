@@ -6,12 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
 
-
-    public LoginPage () {
-    }
-
-
-    static  String Url = "\"https://account.habr.com/login/?state=3a276216c5686ad1c52be2a9895cd8b2&consumer=habr&hl=ru_RU\"";
+       public  static final  String Url = "\"https://account.habr.com/login/?state=3a276216c5686ad1c52be2a9895cd8b2&consumer=habr&hl=ru_RU\"";
 
     @FindBy (xpath = "//input[@type='email']")
     WebElement emailField;
@@ -83,7 +78,7 @@ public class LoginPage extends BasePage {
 
     public HomePage submitLoginForm (){
         submitButton.click();
-        return new HomePage(driver, waiter);
+        return new HomePage();
     }
 
 
@@ -91,13 +86,14 @@ public class LoginPage extends BasePage {
         enterEmail("ruslanhasiuk@gmail.com");
         enterPassword("2408Hekz");
         submitLoginForm();
-        return new HomePage(driver,waiter);
+        return new HomePage();
     }
 
 
 
     public void resetPassword ()
     {
+
         driver.findElement(resetButton).click();
     }
 

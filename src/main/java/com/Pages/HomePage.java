@@ -1,25 +1,21 @@
 package com.Pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HomePage {
+public class HomePage extends BasePage {
 
-    private WebDriver driver;
-    private WebDriverWait waiter;
-    private String f = "https://habr.com/ru/top/\"";
+//    private WebDriver driver;
+//    private WebDriverWait waiter;
+    private String HomePageUrl = "https://habr.com/ru/top/\"";
 
 
-    public HomePage(WebDriver driver, WebDriverWait waiter) {
-        this.driver = driver;
-        this.waiter = waiter;
-        PageFactory.initElements(driver, this);
-    }
+//    public HomePage(WebDriver driver, WebDriverWait waiter) {
+//        this.driver = driver;
+//        this.waiter = waiter;
+//        PageFactory.initElements(driver, this);
+//    }
 
 
 //    @FindBy (xpath = "//div[@class=\"page-header page-header_110\"]");
@@ -44,12 +40,8 @@ public class HomePage {
 
 
 
-    public void waitUntilOageTitleIs (String expectedTitle){
-        waiter.until(ExpectedConditions.titleIs(HomePageTitle));
-    }
-
     public void openHomePage() {
-        driver.get(f);
+        driver.get(HomePageUrl);
     }
 
 
@@ -86,14 +78,14 @@ public class HomePage {
 
     public UsersPage goToUsersPage() {
         driver.findElement(tabAuthors).click();
-        return new UsersPage(driver, waiter);
+        return new UsersPage();
     }
 
 
     public com.Pages.CareerPortal openCareerpage() {
         driver.findElement(projectsDropdown).click();
         driver.findElement(careerPortal).click();
-        return new CareerPortal(driver, waiter);
+        return new CareerPortal();
 
     }
 
@@ -110,13 +102,13 @@ public class HomePage {
 
      public  DesignPage goToDesignPage (){
          driver.findElement(designNavigationButton).click();
-         return new DesignPage(driver,waiter);
+         return new DesignPage();
            }
 
 
     public UserProfile openAuthorProfile (){
         driver.findElement(By.linkText("JohnRico")).click();
-        return new UserProfile(driver, waiter);
+        return new UserProfile();
     }
 
 

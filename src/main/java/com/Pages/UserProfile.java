@@ -1,18 +1,16 @@
 package com.Pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class UserProfile {
-    private WebDriver driver;
-    private WebDriverWait waiter;
-
-
-    public UserProfile (WebDriver driver, WebDriverWait waiter){
-        this.driver = driver;
-        this.waiter = waiter;
-            }
+public class UserProfile extends BasePage {
+//    private WebDriver driver;
+//    private WebDriverWait waiter;
+//
+//
+//    public UserProfile (WebDriver driver, WebDriverWait waiter){
+//        this.driver = driver;
+//        this.waiter = waiter;
+//            }
 
             By PostsTab = By.xpath("//h3[contains(text(),'Публикации')]");
             By CommentsTab = By.xpath("//h3[contains(text(),'Комментарии')]");

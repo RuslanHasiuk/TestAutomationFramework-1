@@ -1,20 +1,11 @@
 package com.Pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class CareerPortal {
+public class CareerPortal extends BasePage {
 
-    private WebDriver driver;
-    private WebDriverWait waiter;
-
-
-        public CareerPortal(WebDriver driver, WebDriverWait waiter){
-         this.driver=driver;
-         this.waiter=waiter;
-              }
 
      By inputProfessionField = By.xpath("//input[@id='q']");
     By inputLocationnField = By.xpath("//input[@id='location']");
@@ -26,7 +17,15 @@ public class CareerPortal {
 
 
 
+            public void openCareerPortal (){
+                driver.get(CareerPortalUrl);
+            }
 
+            public void waitUntilTitleIsDisplayed(String title){
+                waiter.until(ExpectedConditions.titleIs(title));
+            }
+
+                     //(ExpectedConditions.titleIs(CareerPortalTitle));
 
             public void openChatBotWindow(){
 
