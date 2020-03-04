@@ -3,6 +3,7 @@ package com.Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
 
@@ -22,32 +23,47 @@ public class LoginPage extends BasePage {
     By resetButton = By.xpath("//a[@class=\"form__remind-password-link\"]");
     By registerButton = By.xpath("//a[contains(text(),'Зарегистрируйтесь')]");
     By loginByFaceBookButton = By.xpath("//a[@title=\"Зарегистрироваться с помощью Facebook\"]");
-    By errorField = By.xpath("//div[@class='s-error']");
+
+
+    public void openPage(){
+
+        driver.get(LoginPageUrl);
+    }
+
+
+    public boolean atLoginPage(String title) {
+        return (driver.getTitle().equals(title));
+    }
+
+
+    public void waitUntilLoginPageTitleIsLoaded(String title)
+    {
+        waiter.until(ExpectedConditions.titleIs(title));
+    }
+
+    public void waitUntilEmailErrorDisplayed() {
+        waiter.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='form__field s-field s-with-error']")));
+    }
+
+    public void waitUntilPasswordErrorDisplayed() {
+        waiter.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class,'notice error')]")));
+    }
+
+    public boolean atPage (String title){
+        return driver.getTitle().equals(title);
+    }
 
 
 
 
-     public boolean atLoginPage (){
-      if(driver.getTitle().equals("Вход — Habr Account")){
-          return true;
-      } else {
-          return false;
-      }
-  }
 
-
-
-
-  String expectedEmailError= "Введите корректный e-mail";
+  private String expectedEmailError= "Введите корректный e-mail";
 
     public boolean isEmailErrorDisplayed(){
         WebElement actualEmailError = driver.findElement(By.xpath("//div[@class='s-error']"));
         String text = actualEmailError.getText();
-        if(text.equalsIgnoreCase(expectedEmailError)){
-            return true;
-        } else {
-            return false;
-        }
+        return (text.equalsIgnoreCase(expectedEmailError));
+
     }
 
     String expectedPasswordError= "Пользователь с такой электронной почтой или паролем не найден";
@@ -55,18 +71,14 @@ public class LoginPage extends BasePage {
     public boolean isPasswordErrorDisplayed(){
         WebElement actualPasswordError = driver.findElement(By.xpath("//div[@class=\"notice__text\"]"));
         String text = actualPasswordError.getText();
-        if(text.equalsIgnoreCase(expectedPasswordError)){
-            return true;
-        } else {
-            return false;
-        }
+        return(text.equalsIgnoreCase(expectedPasswordError));
+
     }
 
 
 
 
     public void enterEmail (String mailbox){
-
         emailField.sendKeys(mailbox);
     }
 

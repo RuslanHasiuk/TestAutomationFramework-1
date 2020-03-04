@@ -1,123 +1,109 @@
 package com.Tests;
 
-import com.Pages.BasePage;
+import com.Pages.JohnRicoBookmarksPage;
+import com.Pages.JohnRicoCommentsPage;
+import com.Pages.JohnRicoPostsPage;
+import com.Pages.UserProfile;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-public class UserProfileTests extends BasePage {
+public class UserProfileTests extends BaseTest {
 
 
-//   @Test
-//    public void checkIfAuthorTabsAreDisplayed() {
-//        UserProfile userProfile = new UserProfile(driver, waiter);
-//
-//        driver.get("https://habr.com/ru/users/JohnRico/");
-//
-//        waiter = new WebDriverWait(driver,20);
-//        waiter.until(ExpectedConditions.titleIs(AuthorJohnRicoPageTitle));
-//
-//        Assert.assertTrue(userProfile.isPostsTabDisplaedAtPage());
-//        Assert.assertTrue(userProfile.isCommentsTabDisplaedAtPage());
-//        Assert.assertTrue(userProfile.isBookmarksTabDisplaedAtPage());
-//    }
-//
-//
-//   @Test
-//    public void checkListOfAuthorsComments(){
-//        UserProfile userProfile = new UserProfile(driver, waiter);
-//        driver.get("https://habr.com/ru/users/JohnRico/");
-//
-//
-//        waiter = new WebDriverWait(driver,20);
-//        waiter.until(ExpectedConditions.titleIs(AuthorJohnRicoPageTitle));
-//
-//        userProfile.findCommentsTab();
-//
-//        waiter = new WebDriverWait(driver,10);
-//        waiter.until(ExpectedConditions.titleIs("Комментарии / Профиль johnrico / Хабр"));
-//
-//        List <WebElement> listOfComments = driver.findElements(By.xpath("//li[@class=\"content-list__item content-list__item_comment content-list__item_comment-plain\"]"));
-//
-//        Assert.assertTrue(listOfComments.size() > 30);
-//    }
-//
-//
-//
-//
-//   @Test
-//    public void checkListOfAuthorsPosts(){
-//        UserProfile userProfile = new UserProfile(driver, waiter);
-//        driver.get("https://habr.com/ru/users/JohnRico/");
-//
-//
-//        waiter = new WebDriverWait(driver,20);
-//        waiter.until(ExpectedConditions.titleIs(AuthorJohnRicoPageTitle));
-//
-//        userProfile.findPostsTab();
-//
-//        waiter = new WebDriverWait(driver,10);
-//        waiter.until(ExpectedConditions.titleIs("Публикации / Профиль JohnRico / Хабр"));
-//
-//        List <WebElement> listOfPosts = driver.findElements(By.xpath("//li[contains(@id,'post')]"));
-//
-//        Assert.assertTrue(listOfPosts.size()  == 20);
-//
-//    }
-//
-//
-//
-//    @Test
-//    public void checkListOfAuthorsBookmarks(){
-//        UserProfile userProfile = new UserProfile(driver, waiter);
-//        driver.get("https://habr.com/ru/users/JohnRico/");
-//
-//
-//        waiter = new WebDriverWait(driver,20);
-//        waiter.until(ExpectedConditions.titleIs(AuthorJohnRicoPageTitle));
-//
-//        userProfile.findBookmarksTab();
-//
-//        waiter = new WebDriverWait(driver,10);
-//        waiter.until(ExpectedConditions.titleIs("Публикации / Закладки / Профиль johnrico / Хабр"));
-//
-//        List <WebElement> listOfBookmarks = driver.findElements(By.xpath("//li[contains(@id,'post')]"));
-//
-//        Assert.assertTrue(listOfBookmarks.size() >= 20);
-//
-//    }
-//
-//
-//    @Test
-//    public void checkSideBarInfo(){
-//        UserProfile userProfile = new UserProfile(driver, waiter);
-//        driver.get("https://habr.com/ru/users/JohnRico/");
-//
-//        waiter = new WebDriverWait(driver,20);
-//        waiter.until(ExpectedConditions.titleIs(AuthorJohnRicoPageTitle));
-//
-//      List <WebElement> listItemsFromSideInfoBar = driver.findElements(By.xpath("//div[@class='default-block__content default-block__content_profile-summary']//li"));
-//
-//   Assert.assertTrue(listItemsFromSideInfoBar.size() == 6);
-//    }
-//
-//
-//
-//
-//    @Test
-//    public void checkSideBarContributionToHubs(){
-//        UserProfile userProfile = new UserProfile(driver, waiter);
-//        driver.get("https://habr.com/ru/users/JohnRico/");
-//
-//
-//        waiter = new WebDriverWait(driver,20);
-//        waiter.until(ExpectedConditions.titleIs(AuthorJohnRicoPageTitle));
-//
-//
-//        List <WebElement> listOfContributionItems =driver.findElements(By.xpath("//div[@class='default-block__content']//li"));
-//
-//        Assert.assertTrue(listOfContributionItems.size() == 10);
-//
-//    }
+    @Test
+    public void checkIfAuthorTabsAreDisplayed() {
+        UserProfile userProfile = new UserProfile();
+
+        userProfile.openUserProfilePage();
+
+        userProfile.waitUntilUserJohnRicoPageisDisplayed(UserJohnRicoPageTitle);
+
+        Assert.assertTrue(userProfile.atPage(UserJohnRicoPageTitle));
+
+        Assert.assertTrue(userProfile.isPostsTabDisplaedAtPage());
+        Assert.assertTrue(userProfile.isCommentsTabDisplaedAtPage());
+        Assert.assertTrue(userProfile.isBookmarksTabDisplaedAtPage());
+    }
+
+    //
+    @Test
+    public void checkListOfAuthorsComments() {
+        UserProfile userProfile = new UserProfile();
+        JohnRicoCommentsPage johnRicoCommentsPage = new JohnRicoCommentsPage();
+
+        userProfile.openUserProfilePage();
+        userProfile.waitUntilUserJohnRicoPageisDisplayed(UserJohnRicoPageTitle);
+        Assert.assertTrue(userProfile.atPage(UserJohnRicoPageTitle));
+
+        userProfile.findCommentsTab();
+        johnRicoCommentsPage.waitUntilJohnRicoCommentsPageisDisplayed(JohnRicoCommentsPageTitle);
+        Assert.assertTrue(johnRicoCommentsPage.atPage(JohnRicoCommentsPageTitle));
+
+        Assert.assertTrue(johnRicoCommentsPage.isListOfCommentsDisplayed());
+
+   }
 
 
 
+    @Test
+    public void checkListOfAuthorsPosts() {
 
-}
+        UserProfile userProfile = new UserProfile();
+        JohnRicoPostsPage johnRicoPostsPage = new JohnRicoPostsPage();
+
+        userProfile.openUserProfilePage();
+        userProfile.waitUntilUserJohnRicoPageisDisplayed(UserJohnRicoPageTitle);
+        Assert.assertTrue(userProfile.atPage(UserJohnRicoPageTitle));
+
+        userProfile.findPostsTab();
+        johnRicoPostsPage.waitUntilJohnRicoPostsPageisDisplayed(JohnRicoPostsPageTitle);
+        Assert.assertTrue(johnRicoPostsPage.atPage(JohnRicoPostsPageTitle));
+
+        Assert.assertTrue(johnRicoPostsPage.isListOfPostsDisplayed());
+   }
+
+
+        @Test
+        public void checkListOfAuthorsBookmarks () {
+
+            UserProfile userProfile = new UserProfile();
+            JohnRicoBookmarksPage johnRicoBookmarksPage = new JohnRicoBookmarksPage();
+
+            userProfile.openUserProfilePage();
+            userProfile.waitUntilUserJohnRicoPageisDisplayed(UserJohnRicoPageTitle);
+            Assert.assertTrue(userProfile.atPage(UserJohnRicoPageTitle));
+
+            userProfile.findBookmarksTab();
+            johnRicoBookmarksPage.waitUntilJohnRicoBookmarksPageisDisplayed(JohnRicoBookmarksPageTitle);
+            Assert.assertTrue(johnRicoBookmarksPage.atPage(JohnRicoBookmarksPageTitle));
+
+            Assert.assertTrue(johnRicoBookmarksPage.isListOfBookmarksDisplayed());
+
+        }
+//
+//
+    @Test
+    public void checkSideBarInfo(){
+        UserProfile userProfile = new UserProfile();
+
+        userProfile.openUserProfilePage();
+        userProfile.waitUntilUserJohnRicoPageisDisplayed(UserJohnRicoPageTitle);
+        Assert.assertTrue(userProfile.atPage(UserJohnRicoPageTitle));
+
+        Assert.assertTrue(userProfile.islistItemsFromSideInfoBarDisplayed());
+       }
+
+
+    @Test
+    public void checkSideBarContributionToHubs(){
+        UserProfile userProfile = new UserProfile();
+
+        userProfile.openUserProfilePage();
+        userProfile.waitUntilUserJohnRicoPageisDisplayed(UserJohnRicoPageTitle);
+        Assert.assertTrue(userProfile.atPage(UserJohnRicoPageTitle));
+
+        Assert.assertTrue(userProfile.islistOfContributionItemsDisplayed());
+
+    }
+ }
+

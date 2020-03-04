@@ -9,12 +9,11 @@ public class AuthorsCommentsTests {
 //    }
 //
 //    @Test
-//    public void checkRedirectionToExactCommentpage(){
+//    public void checkRedirectionToExactCommentsPage(){
 //
 //    }
 //
 //    @Test
-//
 //    public void checkRedirectionToArticle (){
 //
 //    }

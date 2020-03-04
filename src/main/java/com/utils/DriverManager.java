@@ -27,7 +27,7 @@ public class DriverManager {
         Log.info("Close driver");
         if (webDriver != null) {
             webDriver.close();
-            webDriver.quit();
+        //    webDriver.quit();
         } else {
             throw new RuntimeException("Error : Driver do not exist.");
         }

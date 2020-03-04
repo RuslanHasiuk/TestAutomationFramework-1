@@ -1,14 +1,18 @@
 package com.Pages;
 
+import com.utils.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 public class HomePage extends BasePage {
 
 //    private WebDriver driver;
 //    private WebDriverWait waiter;
-    private String HomePageUrl = "https://habr.com/ru/top/\"";
+ //   private String HomePageUrl = "https://habr.com/ru/top/\"";
 
 
 //    public HomePage(WebDriver driver, WebDriverWait waiter) {
@@ -38,23 +42,51 @@ public class HomePage extends BasePage {
     By saveButton = By.xpath("//button[@class='btn btn_blue btn_huge btn_full-width js-popup_save_btn']");
     By designNavigationButton = By.xpath("//div[@class='layout__row layout__row_navbar']//li[5]//a[1]");
 
+   public void waitUntilHomePageTitleIsDisplayed (String title){
+       waiter.until(ExpectedConditions.titleIs(title));
+   }
+
+    public void waitUntilHomePageTitleWithSortedLabelAllPosts(String title){
+        waiter.until(ExpectedConditions.titleIs(title));
+
+    }
+
+    public void waitUntilSettingsPOpupIsOpened(){
+        waiter.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='popup']//div[@class='popup__body']")));
+    }
+
+
+
+
+
+
+    public boolean islistOfArticlesDisplayed(){
+        List<WebElement> listOfArticles = driver.findElements(By.xpath(("//li[contains(@id,'post')]")));
+        return (listOfArticles.size()) >= 20;
+    }
+
+
+    public void waitUntilUserJohnRicoIsVisible (String title){
+
+       waiter.until(ExpectedConditions.titleIs(title));
+    }
 
 
     public void openHomePage() {
-        driver.get(HomePageUrl);
+
+       driver.get(HomePageUrl);
     }
 
 
-    public boolean atHomePage() {
-        if (driver.getTitle().equals("Лучшие публикации за сутки / Хабр")) {
-            return true;
-        } else {
-            return false;
+    public boolean atHomePage(String title) {
+
+        return (driver.getTitle().equals(title));
         }
 
-    }
 
-//    public boolean isEnglisVersion (){
+
+
+//    public boolean isEnglisVersionSelected (){
 //        if (driver.getTitle().equals(Home)){
 //
 //        } else {
@@ -66,8 +98,8 @@ public class HomePage extends BasePage {
 
 
     public void filterByAllposts() {
-
         filterBylabelAllPosts.click();
+        Log.info("Label AllPOsts is selected");
      }
 
 
@@ -76,10 +108,11 @@ public class HomePage extends BasePage {
     }
 
 
-    public UsersPage goToUsersPage() {
+    public UsersListPage goToUsersPage() {
         driver.findElement(tabAuthors).click();
-        return new UsersPage();
+        return new UsersListPage();
     }
+
 
 
     public com.Pages.CareerPortal openCareerpage() {
@@ -89,15 +122,21 @@ public class HomePage extends BasePage {
 
     }
 
+    public void waitUntilTitleIsDisplayed(String title){
+        waiter.until(ExpectedConditions.titleIs(title));
+        Log.info("Title of EnglishHomePage is present");
+    }
 
     public void openLanguageBarSettings (){
         driver.findElement(languageBarSettings).click();
             }
 
-     public void switchtoEnglishLanguage(){
+     public EnglishHomePage switchtoEnglishLanguage(){
 
         driver.findElement(englishLanguageRaddioButton).click();
         driver.findElement(saveButton).click();
+
+        return  new EnglishHomePage();
      }
 
      public  DesignPage goToDesignPage (){
